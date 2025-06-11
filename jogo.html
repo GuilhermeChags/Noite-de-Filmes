@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mini Game: Caça ao botão 🎯</title>
+  <link rel="stylesheet" href="estilo.css" />
+  <style>
+    #game-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      border: 2px dashed white;
+      border-radius: 20px;
+      overflow: hidden;
+      user-select: none;
+    }
+    #botaoMaluco {
+      position: absolute;
+      padding: 12px 24px;
+      font-size: 1.1em;
+      border-radius: 25px;
+      border: none;
+      background-color: #e91e63;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #botaoMaluco:hover {
+      background-color: #ff4081;
+    }
+    #mensagem {
+      margin-top: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: white;
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Mini Game: Caça ao botão 🎯</h1>
+    <p>Clique no botão que fica pulando 5 vezes para ganhar sua surpresa! 🎉</p>
+    <div id="game-container">
+      <button id="botaoMaluco">Clique em mim!</button>
+    </div>
+    <div id="mensagem"></div>
+  </div>
+
+  <script>
+    const botao = document.getElementById("botaoMaluco");
+    const container = document.getElementById("game-container");
+    const mensagem = document.getElementById("mensagem");
+    let clicks = 0;
+
+    function moverBotao() {
+      // tamanho do container
+      const maxWidth = container.clientWidth - botao.offsetWidth;
+      const maxHeight = container.clientHeight - botao.offsetHeight;
+
+      // nova posição aleatória
+      const posX = Math.random() * maxWidth;
+      const posY = Math.random() * maxHeight;
+
+      botao.style.left = posX + "px";
+      botao.style.top = posY + "px";
+    }
+
+    // na primeira vez, posiciona aleatório
+    moverBotao();
+
+    // ao tentar clicar no botão, ele se move antes de registrar o click
+    botao.addEventListener("mouseenter", moverBotao);
+
+    botao.addEventListener("click", () => {
+      clicks++;
+      mensagem.textContent = `Você clicou ${clicks} de 5 vezes!`;
+
+      if (clicks >= 5) {
+        mensagem.innerHTML = "🎁 Parabéns! Sua surpresa: Um combo do MC com direito a batata de cheddar e bacon! Mande um print do resultado e desbloqueie o presente 💖";
+        botao.disabled = true;
+        botao.style.cursor = "default";
+        botao.style.backgroundColor = "gray";
+      }
+    });
+  </script>
+</body>
+</html>

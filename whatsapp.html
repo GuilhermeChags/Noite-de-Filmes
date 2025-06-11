@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vamos conversar 💬</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div class="card">
+    <h1>Agora é com você 💬</h1>
+    <p>Você pode escolher o filme comigo pelo WhatsApp e ganhar uma surpresa jogando um mini game! 💖</p>
+    
+    <!-- Botão do WhatsApp -->
+    <button id="botaoWhatsapp">Entre aqui</button>
+
+    <!-- Botão do mini game -->
+    <button id="botaoJogo" style="margin-top: 15px;"> Mini game da surpresa</button>
+  </div>
+
+  <script>
+    document.getElementById("botaoWhatsapp").addEventListener("click", function () {
+      const link = "https://chat.whatsapp.com/DqPhNtsIgQ9A1oZiMaDYxV";
+      window.open(link, "_blank");
+    });
+
+    document.getElementById("botaoJogo").addEventListener("click", function () {
+  window.location.href = "jogo.html";
+    });
+
+
+    function criarCoracoes() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(criarCoracoes, 300);
+  </script>
+</body>
+</html>
